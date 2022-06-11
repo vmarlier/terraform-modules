@@ -102,5 +102,18 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/windows,macos,linux,vim,vscode
+### Terraform ###
+# Local .terraform directories
+**/.terraform/*
 
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# plan
+tfplan
+
+# lock
+.terraform.lock.hcl
+
+# End of https://www.toptal.com/developers/gitignore/api/windows,macos,linux,vim,vscode
