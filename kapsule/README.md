@@ -79,6 +79,9 @@ module "kapsule" {
   }
 }
 ```
+
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
 ## Requirements
 
 | Name | Version |
@@ -133,6 +136,8 @@ No modules.
 | <a name="output_cluster_kubeconfig"></a> [cluster\_kubeconfig](#output\_cluster\_kubeconfig) | The raw kubeconfig file. |
 | <a name="output_cluster_token"></a> [cluster\_token](#output\_cluster\_token) | The token to connect to the Kubernetes API server. |
 | <a name="output_node_pools"></a> [node\_pools](#output\_node\_pools) | Details about the Kapsule node pools. |
+
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Author
 
