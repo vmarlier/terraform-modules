@@ -53,7 +53,7 @@ module "fluxv2" {
 
   labels = {
     "app.kubernetes.io/name"       = "fluxv2"
-    "app.kubernetes.io/part-of"    = "GitOps-tools"
+    "app.kubernetes.io/part-of"    = "gitops-tools"
   }
 }
 ```
@@ -108,7 +108,7 @@ module "fluxv2" {
 
   labels = {
     "app.kubernetes.io/name"       = "fluxv2"
-    "app.kubernetes.io/part-of"    = "GitOps-tools"
+    "app.kubernetes.io/part-of"    = "gitops-tools"
   }
 }
 ```
