@@ -3,6 +3,7 @@ The terraform-module repository is a collection of module that I used and find u
 
 ### Table of contents
 * [Kapsule: The managed Kubernetes cluster by Scaleway](./kapsule)
+* [Fluxv2: One of the leader in GitOps projects](./fluxv2)
 
 ### How to commit
 Please, take a look at the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0-beta.2/) specifications.
