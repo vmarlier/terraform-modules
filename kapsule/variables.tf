@@ -11,13 +11,13 @@ variable "cluster_name" {
 variable "cluster_region" {
   type        = string
   description = "The region in which the cluster should be created."
-  default = null
+  default     = null
 }
 
 variable "cluster_project_id" {
   type        = string
   description = "The ID of the project the cluster is associated with."
-  default = null
+  default     = null
 }
 
 variable "cluster_type" {
@@ -29,7 +29,7 @@ variable "cluster_type" {
 variable "cluster_description" {
   type        = string
   description = "A description for the Kubernetes cluster."
-  default = null
+  default     = null
 }
 
 variable "cluster_version" {
@@ -45,9 +45,9 @@ variable "cluster_cni" {
 
 variable "cluster_auto_upgrade" {
   type = object({
-    enable      = bool
-    start_hour  = number
-    day         = string
+    enable     = bool
+    start_hour = number
+    day        = string
   })
   description = "Cluster auto-upgrade configuration."
   default = {
@@ -59,29 +59,29 @@ variable "cluster_auto_upgrade" {
 
 variable "cluster_autoscaler" {
   type = object({
-    disable_scale_down                = bool
-    scale_down_delay                  = string
-    scale_down_unneeded_time          = string
-    estimator                         = string
-    expander                          = string
-    ignore_daemonsets_utilization     = bool
-    balance_similar_node_groups       = bool
-    expandable_pods_priority_cutoff   = string
-    scale_down_utilization_threshold  = number
-    max_graceful_termination_sec      = number
+    disable_scale_down               = bool
+    scale_down_delay                 = string
+    scale_down_unneeded_time         = string
+    estimator                        = string
+    expander                         = string
+    ignore_daemonsets_utilization    = bool
+    balance_similar_node_groups      = bool
+    expandable_pods_priority_cutoff  = string
+    scale_down_utilization_threshold = number
+    max_graceful_termination_sec     = number
   })
   description = "Cluster autoscaler configuration."
   default = {
-    disable_scale_down                = false
-    scale_down_delay                  = "10m"
-    scale_down_unneeded_time          = "10m"
-    estimator                         = "binpacking"
-    expander                          = "random"
-    ignore_daemonsets_utilization     = false
-    balance_similar_node_groups       = false
-    expandable_pods_priority_cutoff   = "-10"
-    scale_down_utilization_threshold  = 0.5
-    max_graceful_termination_sec      = 600
+    disable_scale_down               = false
+    scale_down_delay                 = "10m"
+    scale_down_unneeded_time         = "10m"
+    estimator                        = "binpacking"
+    expander                         = "random"
+    ignore_daemonsets_utilization    = false
+    balance_similar_node_groups      = false
+    expandable_pods_priority_cutoff  = "-10"
+    scale_down_utilization_threshold = 0.5
+    max_graceful_termination_sec     = 600
   }
 }
 
@@ -123,8 +123,8 @@ variable "cluster_tags" {
 variable "node_pools" {
   type = map(object({
     node_type = string
-    zone   = string
-    region = string
+    zone      = string
+    region    = string
 
     scaling = object({
       size     = number

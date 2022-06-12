@@ -34,7 +34,7 @@ output "cluster_ca_certificate" {
 
 output "node_pools" {
   description = "Details about the Kapsule node pools."
-  value       = { for k, v in scaleway_k8s_pool.node_pool :
+  value = { for k, v in scaleway_k8s_pool.node_pool :
     k => {
       nodes = v.nodes
       id    = v.id
