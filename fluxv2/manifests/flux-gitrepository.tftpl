@@ -1,0 +1,14 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: ${repository_name}
+  namespace: ${namespace}
+spec:
+  interval: ${git_poll_interval}
+  url: ${git_url}
+  ref:
+    branch: ${git_branch}
+  secretRef:
+    name: "fluxv2-git-deploy-${repository_name}"
+  timeout: ${git_timeout}

@@ -1,0 +1,157 @@
+# Disable installing CRDs since we strongly advise to deploy them separately
+installCRDs: false
+
+# Disable network policies by default
+policies:
+  create: false
+
+# Let the chart create the RBAC only when PSP is disabled
+# When PSP is enabled we need to create custom RBAC, especially on the Kustomize & Helm Controllers
+# Otherwise those components will have the permissions to use any policies, resulting in a non-deterministic behavior
+rbac:
+  create: no
+
+loglevel: info
+
+watchallnamespaces: ${watch_all_namespaces}
+
+# -- contents of pod imagePullSecret in form 'name=[secretName]'; applied to all controllers
+%{ if image_pull_secret != "" ~}
+imagePullSecret: ${image_pull_secret}
+%{ endif ~}
+
+# controllers
+helmcontroller:
+  create: ${helm_controller_create}
+%{ if helm_controller_image != "" ~}
+  image: ${helm_controller_image}
+%{ endif ~}
+  resources:
+    limits:
+      cpu: ${helm_controller_cpu_limits}
+      memory: ${helm_controller_memory_limits}
+    requests:
+      cpu: ${helm_controller_cpu_requests}
+      memory: ${helm_controller_memory_requests}
+  labels:
+    ${labels}
+  container:
+    additionalargs:
+      - --concurrent=${helm_controller_concurrency}
+
+imageautomationcontroller:
+  create: ${image_automation_controller_create}
+%{ if image_automation_controller_image != "" ~}
+  image: ${image_automation_controller_image}
+%{ endif ~}
+  resources:
+    limits:
+      cpu: ${image_automation_controller_cpu_limits}
+      memory: ${image_automation_controller_memory_limits}
+    requests:
+      cpu: ${image_automation_controller_cpu_requests}
+      memory: ${image_automation_controller_memory_requests}
+  labels:
+    ${labels}
+  container:
+    additionalargs:
+      - --concurrent=${image_automation_controller_concurrency}
+
+imagereflectorcontroller:
+  create: ${image_reflector_controller_create}
+%{ if image_reflector_controller_image != "" ~}
+  image: ${image_reflector_controller_image}
+%{ endif ~}
+  resources:
+    limits:
+      cpu: ${image_reflector_controller_cpu_limits}
+      memory: ${image_reflector_controller_memory_limits}
+    requests:
+      cpu: ${image_reflector_controller_cpu_requests}
+      memory: ${image_reflector_controller_memory_requests}
+  labels:
+    ${labels}
+  container:
+    additionalargs:
+      - --concurrent=${image_reflector_controller_concurrency}
+
+kustomizecontroller:
+  create: ${kustomize_controller_create}
+%{ if kustomize_controller_image != "" ~}
+  image: ${kustomize_controller_image}
+%{ endif ~}
+  resources:
+    limits:
+      cpu: ${kustomize_controller_cpu_limits}
+      memory: ${kustomize_controller_memory_limits}
+    requests:
+      cpu: ${kustomize_controller_cpu_requests}
+      memory: ${kustomize_controller_memory_requests}
+  labels:
+    ${labels}
+  container:
+    additionalargs:
+      - --concurrent=${kustomize_controller_concurrency}
+  secret:
+    # -- Create a secret to use it with extraSecretMounts. Defaults to false.
+    create: false
+    name: ""
+    data: {}
+  # -- Defines envFrom using a configmap and/or secret.
+  envFrom:
+    map:
+      name: ""
+    secret:
+      name: ""
+  # -- Defines additional mounts with secrets.
+  # Secrets must be manually created in the namespace or with kustomizecontroller.secret
+  extraSecretMounts: []
+    # - name: secret-files
+    #   mountPath: /etc/secrets
+    #   subPath: ""
+    #   secretName: secret-files
+    #   readOnly: true
+
+
+notificationcontroller:
+  create: ${notification_controller_create}
+%{ if notification_controller_image != "" ~}
+  image: ${notification_controller_image}
+%{ endif ~}
+  resources:
+    limits:
+      cpu: ${notification_controller_cpu_limits}
+      memory: ${notification_controller_memory_limits}
+    requests:
+      cpu: ${notification_controller_cpu_requests}
+      memory: ${notification_controller_memory_requests}
+  labels:
+    ${labels}
+  container:
+    additionalargs:
+      - --concurrent=${notification_controller_concurrency}
+  service:
+    labels:
+      ${service_labels}
+
+sourcecontroller:
+  create: ${source_controller_create}
+%{ if source_controller_image != "" ~}
+  image: ${source_controller_image}
+%{ endif ~}
+  resources:
+    limits:
+      cpu: ${source_controller_cpu_limits}
+      memory: ${source_controller_memory_limits}
+    requests:
+      cpu: ${source_controller_cpu_requests}
+      memory: ${source_controller_memory_requests}
+  labels:
+    ${labels}
+  container:
+    additionalargs:
+      - --concurrent=${source_controller_concurrency}
+  service:
+    labels:
+      ${service_labels}
+  extraEnv: []

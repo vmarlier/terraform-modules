@@ -1,0 +1,13 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: Bucket
+metadata:
+  name: ${bucket_name}
+  namespace: ${namespace}
+spec:
+  interval: ${interval}
+  endpoint: ${bucket_endpoint}
+  insecure: ${insecure}
+  secretRef:
+    name: "fluxv2-bucket-deploy-${bucket_name}"
+  bucketName: ${bucket_name}

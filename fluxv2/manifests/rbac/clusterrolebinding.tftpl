@@ -1,0 +1,28 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: ${release_name}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: ${release_name}
+subjects:
+  - name: helm-controller
+    namespace: ${release_namespace}
+    kind: ServiceAccount
+  - name: image-automation-controller
+    namespace: ${release_namespace}
+    kind: ServiceAccount
+  - name: image-reflector-controller
+    namespace: ${release_namespace}
+    kind: ServiceAccount
+  - name: kustomize-controller
+    namespace: ${release_namespace}
+    kind: ServiceAccount
+  - name: notification-controller
+    namespace: ${release_namespace}
+    kind: ServiceAccount
+  - name: source-controller
+    namespace: ${release_namespace}
+    kind: ServiceAccount

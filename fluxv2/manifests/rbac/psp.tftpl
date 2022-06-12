@@ -1,0 +1,27 @@
+---
+# This PodSecurityPolicy has been written for the admin services
+# It is NOT supposed to be used, except for all the members of the admin namespace
+# It restrict root privilege, but still allow pods to run as root and use host networks, volumes, etc...
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: ${release_name}
+spec:
+  allowPrivilegeEscalation: true
+  allowedCapabilities:
+    - '*'
+  volumes:
+    - secret
+    - emptyDir
+    - configMap
+  hostPorts:
+    - max: 0
+      min: 0
+  runAsUser:
+    rule: RunAsAny
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+  fsGroup:
+    rule: RunAsAny

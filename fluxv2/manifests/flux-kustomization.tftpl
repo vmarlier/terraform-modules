@@ -1,0 +1,15 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: ${repository_name}-${kustomization_name}
+  namespace: ${namespace}
+spec:
+  interval: ${kustomization_interval}
+  path: ${kustomization_path}
+  sourceRef:
+    kind: ${source_kind}
+    name: ${repository_name}
+  prune: ${kustomization_prune}
+  wait: ${kustomization_wait}
+  timeout: ${kustomization_timeout}

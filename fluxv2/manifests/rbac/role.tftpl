@@ -1,0 +1,12 @@
+---
+# Create a role that has the permission to use the above PSP (only available in admin)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: ${release_name}
+  namespace: ${release_namespace}
+rules:
+  - apiGroups: [policy]
+    resources: [podsecuritypolicies]
+    verbs: [use]
+    resourceNames: [${release_name}]
