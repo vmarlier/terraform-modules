@@ -4,7 +4,7 @@
 
 resource "kubectl_manifest" "psp" {
   yaml_body = templatefile(
-    "${path.module}/manifests/rbac/psp.tftpl",
+    "${path.module}/templates/rbac/psp.tftpl",
     {
       release_name = var.release_name
     }
@@ -15,7 +15,7 @@ resource "kubectl_manifest" "role" {
   depends_on = [kubectl_manifest.psp]
 
   yaml_body = templatefile(
-    "${path.module}/manifests/rbac/role.tftpl",
+    "${path.module}/templates/rbac/role.tftpl",
     {
       release_name      = var.release_name
       release_namespace = var.namespace
@@ -27,7 +27,7 @@ resource "kubectl_manifest" "rolebinding" {
   depends_on = [kubectl_manifest.role]
 
   yaml_body = templatefile(
-    "${path.module}/manifests/rbac/rolebinding.tftpl",
+    "${path.module}/templates/rbac/rolebinding.tftpl",
     {
       release_name      = var.release_name
       release_namespace = var.namespace
@@ -37,7 +37,7 @@ resource "kubectl_manifest" "rolebinding" {
 
 resource "kubectl_manifest" "clusterrole" {
   yaml_body = templatefile(
-    "${path.module}/manifests/rbac/clusterrole.tftpl",
+    "${path.module}/templates/rbac/clusterrole.tftpl",
     {
       release_name = var.release_name
     }
@@ -48,7 +48,7 @@ resource "kubectl_manifest" "clusterrolebinding" {
   depends_on = [kubectl_manifest.clusterrole]
 
   yaml_body = templatefile(
-    "${path.module}/manifests/rbac/clusterrolebinding.tftpl",
+    "${path.module}/templates/rbac/clusterrolebinding.tftpl",
     {
       release_name      = var.release_name
       release_namespace = var.namespace
@@ -71,7 +71,7 @@ resource "helm_release" "fluxv2" {
   namespace = var.namespace
 
   values = [
-    templatefile("${path.module}/manifests/chart-values.tftpl",
+    templatefile("${path.module}/templates/chart-values.tftpl",
       {
         watch_all_namespaces = var.watch_all_namespaces
         labels               = indent(4, yamlencode(var.labels))
@@ -171,7 +171,7 @@ resource "kubectl_manifest" "flux_git_repositories" {
 
   for_each = var.git_repositories
   yaml_body = templatefile(
-    "${path.module}/manifests/flux-gitrepository.tftpl",
+    "${path.module}/templates/flux-gitrepository.tftpl",
     {
       namespace = var.namespace
 
@@ -217,7 +217,7 @@ resource "kubectl_manifest" "flux_buckets" {
 
   for_each = var.buckets
   yaml_body = templatefile(
-    "${path.module}/manifests/flux-buckets.tftpl",
+    "${path.module}/templates/flux-buckets.tftpl",
     {
       namespace = var.namespace
 
@@ -279,7 +279,7 @@ resource "kubectl_manifest" "flux_kustomizations_from_gitrepositories" {
   }
 
   yaml_body = templatefile(
-    "${path.module}/manifests/flux-kustomization.tftpl",
+    "${path.module}/templates/flux-kustomization.tftpl",
     {
       namespace = var.namespace
 
@@ -305,7 +305,7 @@ resource "kubectl_manifest" "flux_kustomizations_from_buckets" {
   }
 
   yaml_body = templatefile(
-    "${path.module}/manifests/flux-kustomization.tftpl",
+    "${path.module}/templates/flux-kustomization.tftpl",
     {
       namespace = var.namespace
 
