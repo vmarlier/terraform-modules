@@ -1,0 +1,49 @@
+%{ if image_registry != "" ~}
+image:
+  registry: ${image_registry}
+  repository: bitnami/sealed-secrets-controller
+  pullSecrets:
+    - ${image_pull_secret}
+%{ endif ~}
+
+networkPolicy:
+  enabled: ${create_networkpolicy}
+
+keyrenewperiod: "0"
+
+podLabels:
+  x509-exporter-exclude: "true"
+
+rbac:
+  create: ${create_rbac}
+  pspEnabled: ${create_psp}
+
+resources:
+  limits:
+    cpu: ${cpu_limits}
+    memory: ${memory_limits}
+  requests:
+    cpu: ${cpu_limits}
+    memory: ${memory_limits}
+
+secretName: ${secret_name}
+
+%{ if service_monitor_labels != "" ~}
+metrics:
+  serviceMonitor:
+    enabled: true
+    interval: 30s
+    labels:
+      prometheus: ${service_monitor_labels}
+    namespace: ${namespace}
+%{ if grafana_dashboard != 0 ~}
+  dashboards:
+    create: true
+    namespace: ${namespace}
+%{ endif ~}
+%{ endif ~}
+
+%{ if labels != 0 ~}
+podLabels:
+  ${labels}
+%{ endif ~}
