@@ -86,7 +86,7 @@ module "kapsule" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1 |
-| <a name="requirement_scaleway"></a> [scaleway](#requirement\_scaleway) | ~> 2.2.1 |
+| <a name="requirement_scaleway"></a> [scaleway](#requirement\_scaleway) | ~> 2.5.0 |
 
 ## Providers
 
