@@ -1,4 +1,4 @@
-# Kapsule cluster
+# scaleway-k8s-cluster
 
 This module aims to ease the creation of a Kapsule cluster on the Scaleway Cloud. Here is a quick example:
 
