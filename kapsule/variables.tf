@@ -22,7 +22,7 @@ variable "cluster_project_id" {
 
 variable "cluster_type" {
   type        = string
-  description = "Wether the cluster is Kapsule or Multicloud."
+  description = "Wether the cluster is Kapsule (Mutualized), Dedicated or Multicloud."
   default     = "kapsule"
 }
 
