@@ -1,6 +1,7 @@
 # ==================================================
 # Resource: Cluster creation
 # ==================================================
+
 resource "scaleway_k8s_cluster" "cluster" {
   name        = var.cluster_name
   type        = var.cluster_type
@@ -8,8 +9,9 @@ resource "scaleway_k8s_cluster" "cluster" {
   version     = var.cluster_version
   cni         = var.cluster_cni
 
-  region     = var.cluster_region
-  project_id = var.cluster_project_id
+  region             = var.cluster_region
+  project_id         = var.cluster_project_id
+  private_network_id = scaleway_vpc_private_network.pn_priv.id
 
   tags = setunion(var.cluster_tags, var.shared_tags)
 
@@ -41,6 +43,7 @@ resource "scaleway_k8s_cluster" "cluster" {
 # ==================================================
 # Resource: Node Pools creation
 # ==================================================
+
 resource "scaleway_k8s_pool" "node_pool" {
   for_each = var.node_pools
 
