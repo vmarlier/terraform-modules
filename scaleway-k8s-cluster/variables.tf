@@ -106,7 +106,7 @@ variable "cluster_api_cert_sans" {
 variable "cluster_delete_additional_resources" {
   type        = bool
   description = "Delete additional resources like block volumes and loadbalancers that were created in Kubernetes on cluster deletion."
-  default     = null
+  default     = false
 }
 
 variable "cluster_tags" {
