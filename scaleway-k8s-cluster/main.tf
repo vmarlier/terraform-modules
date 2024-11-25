@@ -11,7 +11,7 @@ resource "scaleway_k8s_cluster" "cluster" {
 
   region             = var.cluster_region
   project_id         = var.cluster_project_id
-  private_network_id = scaleway_vpc_private_network.pn_priv.id
+  private_network_id = var.private_network_id
 
   tags = setunion(var.cluster_tags, var.shared_tags)
 

@@ -115,6 +115,12 @@ variable "cluster_tags" {
   default     = []
 }
 
+variable "private_network_id" {
+  type = string
+  description = "The ID of the private network of the cluster."
+  default = ""
+}
+
 # ==================================================
 # Variables: Node Pool(s)
 # References: https://registry.terraform.io/providers/scaleway/scaleway/latest/docs/resources/k8s_pool#arguments-reference
